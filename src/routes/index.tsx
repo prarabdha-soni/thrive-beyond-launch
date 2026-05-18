@@ -1,9 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { Instagram, Mail, Sparkles, ArrowRight } from "lucide-react";
+import { Instagram, Mail, ArrowRight } from "lucide-react";
 import { toast } from "sonner";
 import { Toaster } from "@/components/ui/sonner";
 import bloom from "@/assets/hero-bloom.jpg";
+import logo from "@/assets/logo.png";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -108,10 +109,8 @@ function Index() {
       <div className="relative z-10 flex min-h-screen flex-col">
         {/* Nav */}
         <header className="flex items-center justify-between px-6 md:px-12 py-6">
-          <div className="flex items-center gap-2">
-            <Sparkles className="h-5 w-5 text-bloom" />
-            <span className="font-display text-xl tracking-tight">SheThrives</span>
-          </div>
+          <img src={logo} alt="SheThrives" className="h-10 md:h-12 w-auto" />
+
           <a
             href="https://instagram.com"
             target="_blank"
