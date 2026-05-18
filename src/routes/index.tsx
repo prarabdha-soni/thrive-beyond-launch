@@ -143,9 +143,8 @@ function Index() {
             className="animate-fade-up mt-6 max-w-xl text-base md:text-lg text-muted-foreground leading-relaxed"
             style={{ animationDelay: "0.2s" }}
           >
-            A new home for women to grow, glow, and rise — together. Stories, rituals,
-            and community, all in one quiet space. We're putting the final petals in
-            place.
+            We're putting the finishing touches on something built for you.
+            Be the first to know when we launch.
           </p>
 
           {/* Countdown */}
