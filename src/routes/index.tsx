@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
-import { Instagram, Mail, ArrowRight } from "lucide-react";
+import { useState } from "react";
+import { Mail, ArrowRight } from "lucide-react";
 import { toast } from "sonner";
 import { Toaster } from "@/components/ui/sonner";
 import bloom from "@/assets/hero-bloom.jpg";
@@ -24,41 +24,7 @@ export const Route = createFileRoute("/")({
   }),
 });
 
-const LAUNCH = new Date();
-LAUNCH.setDate(LAUNCH.getDate() + 30);
-
-function useCountdown(target: Date) {
-  const [now, setNow] = useState(() => Date.now());
-  useEffect(() => {
-    const i = setInterval(() => setNow(Date.now()), 1000);
-    return () => clearInterval(i);
-  }, []);
-  const diff = Math.max(0, target.getTime() - now);
-  const d = Math.floor(diff / 86400000);
-  const h = Math.floor((diff / 3600000) % 24);
-  const m = Math.floor((diff / 60000) % 60);
-  const s = Math.floor((diff / 1000) % 60);
-  return { d, h, m, s };
-}
-
-function TimeCell({ value, label }: { value: number; label: string }) {
-  return (
-    <div className="flex flex-col items-center">
-      <div className="relative w-20 sm:w-24 md:w-28 aspect-square rounded-2xl bg-card/70 backdrop-blur-md border border-border shadow-[var(--shadow-soft)] flex items-center justify-center overflow-hidden">
-        <span className="font-display text-4xl sm:text-5xl md:text-6xl font-light text-ink tabular-nums">
-          {String(value).padStart(2, "0")}
-        </span>
-        <div className="absolute inset-x-0 top-1/2 h-px bg-border/60" />
-      </div>
-      <span className="mt-3 text-[0.7rem] tracking-[0.25em] uppercase text-muted-foreground">
-        {label}
-      </span>
-    </div>
-  );
-}
-
 function Index() {
-  const { d, h, m, s } = useCountdown(LAUNCH);
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -111,22 +77,12 @@ function Index() {
           <a href="/" className="font-display font-medium text-2xl md:text-3xl tracking-tight leading-none">
             <span className="text-bloom">She</span><span className="text-accent">Thrives</span><span className="text-bloom">.</span>
           </a>
-
-          <a
-            href="https://instagram.com"
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-ink transition"
-          >
-            <Instagram className="h-4 w-4" />
-            <span className="hidden sm:inline">@shethrives</span>
-          </a>
         </header>
 
         {/* Hero */}
         <section className="flex-1 flex flex-col items-center justify-center px-6 text-center">
-          <div className="animate-fade-up inline-flex items-center gap-2 rounded-full border border-border bg-card/60 backdrop-blur px-4 py-1.5 text-xs tracking-[0.2em] uppercase text-muted-foreground">
-            <span className="h-1.5 w-1.5 rounded-full bg-bloom animate-pulse" />
+          <div className="animate-fade-up inline-flex items-center gap-2 rounded-full border border-bloom/50 bg-bloom/10 backdrop-blur px-6 py-2 text-sm tracking-[0.2em] uppercase text-bloom font-medium shadow-[0_0_20px_rgba(255,182,193,0.3)]">
+            <span className="h-2 w-2 rounded-full bg-bloom animate-pulse" />
             Launching Soon
           </div>
 
@@ -146,17 +102,6 @@ function Index() {
             We're putting the finishing touches on something built for you.
             Be the first to know when we launch.
           </p>
-
-          {/* Countdown */}
-          <div
-            className="animate-fade-up mt-12 flex items-center gap-3 sm:gap-5"
-            style={{ animationDelay: "0.3s" }}
-          >
-            <TimeCell value={d} label="Days" />
-            <TimeCell value={h} label="Hours" />
-            <TimeCell value={m} label="Minutes" />
-            <TimeCell value={s} label="Seconds" />
-          </div>
 
           {/* Email form */}
           <form
