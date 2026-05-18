@@ -109,7 +109,9 @@ function Index() {
       <div className="relative z-10 flex min-h-screen flex-col">
         {/* Nav */}
         <header className="flex items-center justify-between px-6 md:px-12 py-6">
-          <img src={logo} alt="SheThrives" className="h-10 md:h-12 w-auto" />
+          <a href="/" className="font-display font-medium text-2xl md:text-3xl tracking-tight leading-none">
+            <span className="text-bloom">She</span><span className="text-accent">Thrives</span><span className="text-bloom">.</span>
+          </a>
 
           <a
             href="https://instagram.com"
