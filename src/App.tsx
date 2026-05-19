@@ -1,30 +1,10 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { Mail, ArrowRight } from "lucide-react";
 import { toast } from "sonner";
 import { Toaster } from "@/components/ui/sonner";
 import bloom from "@/assets/hero-bloom.jpg";
 
-export const Route = createFileRoute("/")({
-  component: Index,
-  head: () => ({
-    meta: [
-      { title: "SheThrives — Launching Soon" },
-      {
-        name: "description",
-        content:
-          "SheThrives is blooming. A space for women to grow, glow, and rise — launching soon. Join the waitlist.",
-      },
-      { property: "og:title", content: "SheThrives — Launching Soon" },
-      {
-        property: "og:description",
-        content: "Something beautiful is on the way. Join the SheThrives waitlist.",
-      },
-    ],
-  }),
-});
-
-function Index() {
+export default function App() {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -46,7 +26,6 @@ function Index() {
     <main className="relative min-h-screen overflow-hidden">
       <Toaster position="top-center" />
 
-      {/* Floating bloom artwork */}
       <div
         className="pointer-events-none absolute -top-32 -right-32 w-[28rem] h-[28rem] md:w-[36rem] md:h-[36rem] opacity-70 animate-float"
         aria-hidden
@@ -72,14 +51,12 @@ function Index() {
       </div>
 
       <div className="relative z-10 flex min-h-screen flex-col">
-        {/* Nav */}
         <header className="flex items-center justify-between px-6 md:px-12 py-6">
           <a href="/" className="font-display font-medium text-2xl md:text-3xl tracking-tight leading-none">
             <span className="text-bloom">She</span><span className="text-accent">Thrives</span><span className="text-bloom">.</span>
           </a>
         </header>
 
-        {/* Hero */}
         <section className="flex-1 flex flex-col items-center justify-center px-6 text-center">
           <div className="animate-fade-up inline-flex items-center gap-2 rounded-full border border-bloom/50 bg-bloom/10 backdrop-blur px-6 py-2 text-sm tracking-[0.2em] uppercase text-bloom font-medium shadow-[0_0_20px_rgba(255,182,193,0.3)]">
             <span className="h-2 w-2 rounded-full bg-bloom animate-pulse" />
@@ -103,7 +80,6 @@ function Index() {
             Be the first to know when we launch.
           </p>
 
-          {/* Email form */}
           <form
             onSubmit={submit}
             className="animate-fade-up mt-12 w-full max-w-md"
