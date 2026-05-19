@@ -2,12 +2,12 @@ import { useState } from "react";
 import { Mail, ArrowRight } from "lucide-react";
 import { toast } from "sonner";
 import { Toaster } from "@/components/ui/sonner";
-import { supabase } from "@/integrations/supabase/client";
 import bloom from "@/assets/hero-bloom.jpg";
 
 export default function App() {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
+  const [submittedEmails, setSubmittedEmails] = useState<Set<string>>(new Set());
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -17,19 +17,19 @@ export default function App() {
       return;
     }
     setLoading(true);
-    const { error } = await supabase
-      .from("waitlist_signups")
-      .insert({ email: trimmed });
+
+    // Mock submission - replace with your own backend when ready
+    await new Promise(resolve => setTimeout(resolve, 800));
+
     setLoading(false);
-    if (error) {
-      if (error.code === "23505") {
-        toast.success("You're already on the list ✿");
-        setEmail("");
-      } else {
-        toast.error("Something went wrong. Please try again.");
-      }
+
+    if (submittedEmails.has(trimmed)) {
+      toast.success("You're already on the list ✿");
+      setEmail("");
       return;
     }
+
+    setSubmittedEmails(prev => new Set(prev).add(trimmed));
     setEmail("");
     toast.success("You're on the list ✿ See you at launch.");
   };

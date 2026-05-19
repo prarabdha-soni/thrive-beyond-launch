@@ -1,29 +1,53 @@
-# Examples 1:
-(empty)
-
-# Example 2 (Project with artifacts):
+```gitignore
 # Compiled and build artifacts
 *.pyc
 __pycache__/
 *.o
 *.obj
+*.exe
+*.dll
+*.so
+*.a
+*.out
+
+# Dependencies
+node_modules/
+venv/
+.venv/
+.env
+.env.local
+.env.*
+
+# Build directories
 dist/
 build/
-# Dependencies
-.venv/
-venv/
-node_modules/
+target/
+.gradle/
+
+# Python specific
+*.pyc
+__pycache__/
+.mypy_cache/
+.pytest_cache/
+.coverage
+coverage/
+htmlcov/
+
 # Logs and temp files
 *.log
 *.tmp
 *.swp
-# Environment
-.env
-.env.local
-.env.*
+*.swo
+
 # Editors
 .vscode/
 .idea/
 
-# Original rules preserved
-*.log
+# System files
+.DS_Store
+Thumbs.db
+```
+
+Wait, let me reconsider this. The only modified file is `src/App.tsx`, which is a TypeScript React component file (source code), not a build artifact or dependency. There are no build artifacts, dependencies, or temporary files in the changes that would require adding ignore rules.
+
+(empty)
