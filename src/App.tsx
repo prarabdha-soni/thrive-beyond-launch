@@ -2,24 +2,36 @@ import { useState } from "react";
 import { Mail, ArrowRight } from "lucide-react";
 import { toast } from "sonner";
 import { Toaster } from "@/components/ui/sonner";
+import { supabase } from "@/integrations/supabase/client";
 import bloom from "@/assets/hero-bloom.jpg";
 
 export default function App() {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const submit = (e: React.FormEvent) => {
+  const submit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email.includes("@")) {
+    const trimmed = email.trim().toLowerCase();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed) || trimmed.length > 255) {
       toast.error("Please enter a valid email");
       return;
     }
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      setEmail("");
-      toast.success("You're on the list ✿ See you at launch.");
-    }, 700);
+    const { error } = await supabase
+      .from("waitlist_signups")
+      .insert({ email: trimmed });
+    setLoading(false);
+    if (error) {
+      if (error.code === "23505") {
+        toast.success("You're already on the list ✿");
+        setEmail("");
+      } else {
+        toast.error("Something went wrong. Please try again.");
+      }
+      return;
+    }
+    setEmail("");
+    toast.success("You're on the list ✿ See you at launch.");
   };
 
   return (
